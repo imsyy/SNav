@@ -29,7 +29,8 @@ const emit = defineEmits(["loadComplete"]);
 // 壁纸随机数
 // 请依据文件夹内的图片个数修改 Math.random() 后面的第一个数字
 const bgRandom = Math.floor(Math.random() * 3 + 1);
-
+bgUrl.value = `/background/bg${bgRandom}.jpg`;
+  
 // 图片加载完成
 
 
@@ -37,11 +38,11 @@ const bgRandom = Math.floor(Math.random() * 3 + 1);
 
 
 // 图片显示失败
-const imgLoadError = () => {
-  console.error("壁纸加载失败：", bgUrl.value);
-  $message.error("壁纸加载失败，已临时切换回默认");
-  bgUrl.value = `/background/bg${bgRandom}.jpg`;
-};
+// const imgLoadError = () => {
+  // console.error("壁纸加载失败：", bgUrl.value);
+  // $message.error("壁纸加载失败，已临时切换回默认");
+ 
+// };
 
 onMounted(() => {
   setBgUrl();
