@@ -31,14 +31,7 @@ const emit = defineEmits(["loadComplete"]);
 const bgRandom = Math.floor(Math.random() * 3 + 1);
 
 // 图片加载完成
-const imgLoadComplete = () => {
-  imgTimeout.value = setTimeout(
-    () => {
-      status.setImgLoadStatus(true);
-    },
-    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
-  );
-};
+
 
 // 图片动画完成
 const imgAnimationEnd = () => {
