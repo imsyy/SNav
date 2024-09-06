@@ -30,33 +30,6 @@ const emit = defineEmits(["loadComplete"]);
 // 请依据文件夹内的图片个数修改 Math.random() 后面的第一个数字
 const bgRandom = Math.floor(Math.random() * 3 + 1);
 
-// 赋值壁纸
-const setBgUrl = () => {
-  const { backgroundType } = set;
-  switch (backgroundType) {
-    case 0:
-      bgUrl.value = `/background/bg${bgRandom}.jpg`;
-      break;
-    case 1: {
-      const isMobile = window.innerWidth < 768;
-      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;
-      break;
-    }
-    case 2:
-      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";
-      break;
-    case 3:
-      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";
-      break;
-    case 4:
-      bgUrl.value = set.backgroundCustom;
-      break;
-    default:
-      bgUrl.value = `/background/bg${bgRandom}.jpg`;
-      break;
-  }
-};
-
 // 图片加载完成
 const imgLoadComplete = () => {
   imgTimeout.value = setTimeout(
