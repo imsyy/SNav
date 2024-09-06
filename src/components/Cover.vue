@@ -29,16 +29,57 @@ const emit = defineEmits(["loadComplete"]);
 // 壁纸随机数
 // 请依据文件夹内的图片个数修改 Math.random() 后面的第一个数字
 const bgRandom = Math.floor(Math.random() * 3 + 1);
-bgUrl.value = `/background/bg${bgRandom}.jpg`;
-  
-// 图片加载完成
 
+// 赋值壁纸
+const setBgUrl = () => {
+  const { backgroundType } = set;
+  switch (backgroundType) {
+    case 0:
+      bgUrl.value = `/background/bg${bgRandom}.jpg`;
+      break;
+    case 1: {
+      const isMobile = window.innerWidth < 768;
+      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;
+      break;
+    }
+    case 2:
+      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";
+      break;
+    case 3:
+      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";
+      break;
+    case 4:
+      bgUrl.value = set.backgroundCustom;
+      break;
+    default:
+      bgUrl.value = `/background/bg${bgRandom}.jpg`;
+      break;
+  }
+};
+
+// 图片加载完成
+const imgLoadComplete = () => {
+  imgTimeout.value = setTimeout(
+    () => {
+      status.setImgLoadStatus(true);
+    },
+    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
+  );
+};
 
 // 图片动画完成
-
+const imgAnimationEnd = () => {
+  console.log("壁纸加载且动画完成");
+  // 加载完成事件
+  emit("loadComplete");
+};
 
 // 图片显示失败
-
+const imgLoadError = () => {
+  console.error("壁纸加载失败：", bgUrl.value);
+  $message.error("壁纸加载失败，已临时切换回默认");
+  bgUrl.value = `/background/bg${bgRandom}.jpg`;
+};
 
 onMounted(() => {
   setBgUrl();
