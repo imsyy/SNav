@@ -518,6 +518,9 @@ function clickFileDom() {
       text-align: center;
       cursor: pointer;
       font-size: 16px;
+      .btnName {
+        margin-left: 2px;
+      }
     }
     #shortCutUploadInput {
       display: none;
